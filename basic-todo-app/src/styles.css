@@ -92,35 +92,20 @@ button {
 
 .done {
   text-decoration: line-through;
-  color: red;
 }
 
 .todoList li span {
-  position: absolute;
-  right: -45px;
-  width: 45px;
-  color: var(--main-white);
-  text-align: center;
-  background: var(--main-red);
-  border-radius: 0 3px 3px 0;
-  cursor: pointer;
-  transition: all 0.3s ease;
+   margin-top: 15px;
+   padding: 0 10px;
 }
 
-.todoList li span.editBtn {
-  position: absolute;
-  right: -45px;
-  width: 45px;
-  color: var(--main-white);
-  text-align: center;
-  background: var(--yellow);
-
-  cursor: pointer;
-  transition: all 0.3s ease;
+.todoList .fa-edit {
+    float: right;
+    color: var(--sub-blue);
 }
-
-.todoList li:hover span {
-  right: 0;
+.fa-trash{
+    float: right;
+    color: var(--main-red);
 }
 
 .wrapper .footer {
