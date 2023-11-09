@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
+  <link
+    rel="stylesheet"
+    href="/basic-todo-app/src/styles.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+  <body>
+    <div class="wrapper">
+      <header>Todo List</header>
+      <div class="inputField">
+        <input type="text" id="input" placeholder="Enter new task" />
+        <button><i class="fas fa-plus" id="newBtn"></i></button>
+      </div>
+      <ul class="todoList"></ul>
+      <div class="footer">
+        <span id="pendingTasks">You have 1 pending tasks.</span>
+        <button id="clearBTN">Clear Done</button>
+      </div>
+    </div>
+
+    <script src="/basic-todo-app/src/app.js"></script>
+  </body>
+</html>
