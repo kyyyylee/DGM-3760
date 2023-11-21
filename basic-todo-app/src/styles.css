@@ -1,12 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 :root {
-  --main-blue: #1572a1;
-  --main-green: #16843b;
+  --main-pink: #F2AEC1;
   --main-grey: #f2f2f2;
-  --main-red: #e74c3c;
+  --main-dark: #594347;
   --main-white: #fff;
-  --sub-blue: #86c6f4;
+  --sub-pink: #F2C9D4;
   --sub-grey: #ccc;
 }
 
@@ -14,13 +13,13 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
   height: 100vh;
   width: 100%;
-  background: var(--main-green);
+  background: var(--main-pink);
 }
 
 button {
@@ -28,7 +27,7 @@ button {
   border: none;
   border-radius: 3px;
   outline: none;
-  background: var(--main-blue);
+  background: var(--main-pink);
   color: var(--main-white);
   cursor: pointer;
 }
@@ -45,6 +44,8 @@ button {
 .wrapper header {
   font-size: 30px;
   font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .wrapper .inputField {
@@ -69,7 +70,7 @@ button {
   font-size: 22px;
 }
 
-.wrapper .todoList {
+.wrapper .todoList, .wrapper .categoryList{
   max-height: 250px;
   overflow-y: scroll;
 }
@@ -77,7 +78,8 @@ button {
 .todoList::-webkit-scrollbar {
   width: 0;
 }
-.todoList li {
+
+.todoList li, .categoryList li {
   list-style: none;
   height: 45px;
   line-height: 45px;
@@ -94,18 +96,18 @@ button {
   text-decoration: line-through;
 }
 
-.todoList li span {
+.todoList li span, .categoryList li span {
    margin-top: 15px;
    padding: 0 10px;
 }
 
-.todoList .fa-edit {
+.fa-edit {
     float: right;
-    color: var(--sub-blue);
+    color: var(--main-dark);
 }
 .fa-trash{
     float: right;
-    color: var(--main-red);
+    color: var(--main-dark);
 }
 
 .wrapper .footer {
