@@ -13,6 +13,7 @@ const pendingTasks = document.querySelector("#pendingTasks");
 const clearButton = document.getElementById("clearBTN");
 const categoryButton = document.getElementById("categoryBTN");
 const categoryList = document.querySelector(".categoryList");
+const categoryFilterer = document.getElementById("categoryFilter")
 
 //prevent repeat todos WORKS
 function removeChildren(container) {
@@ -26,10 +27,12 @@ newButton.addEventListener("click", addNewTodo);
 let newTodoID = 1
 function addNewTodo() {
   const newTodoName = document.getElementById("input").value;
+  const selectedCategory = document.getElementById("categorySelector").value
   const newTodo = {
     id: newTodoID,
     text: newTodoName,
-    complete: false
+    complete: false,
+    category: selectedCategory
   };
   todos.push(newTodo);
   removeChildren(todoList);
@@ -123,6 +126,10 @@ function deleteCategory(id) {
   })
   removeChildren(categoryList);
   populateCategories(categories);
+  categorySelection();
+  categoryFilter()
+  removeChildren(todoList);
+  populateList(todos);
 }
 
 //User can edit todos & categories
@@ -163,6 +170,10 @@ function editCategory(id) {
     })
     removeChildren(categoryList);
     populateCategories(categories);
+    categorySelection();
+    categoryFilter()
+    removeChildren(todoList);
+    populateList(todos);
   }
 }
 
@@ -191,6 +202,8 @@ function addCategory() {
   categories.push(newCategory);
   removeChildren(categoryList);
   populateCategories(categories);
+  categorySelection();
+  categoryFilter();
   //clear input box after entering
   document.getElementById("category").value = ""
   newCategoryID ++
@@ -218,6 +231,46 @@ function populateCategories(categories) {
     listItem.appendChild(editButton)
     categoryList.appendChild(listItem)
   })
+}
+
+//User selects a category when adding a todo
+function categorySelection() {
+  let categorySelector = document.getElementById("categorySelector")
+  categorySelector.innerHTML = '<option value="">Category</option>'
+  categories.forEach((category) => {
+    let option = document.createElement("option")
+    option.value = category.name
+    option.innerText = category.name
+    categorySelector.appendChild(option)
+  })
+}
+
+//User can filter list by category
+categoryFilterer.addEventListener("change", filterTodos)
+
+function categoryFilter() {
+  categoryFilterer.innerHTML = '<option value="all">All</option>'
+  categories.forEach((category) => {
+    let option = document.createElement("option")
+    option.value = category.name
+    option.innerText = category.name
+    categoryFilterer.appendChild(option)
+  })
+}
+
+function filterTodos() {
+  let selectedCategory = document.getElementById("categoryFilter").value
+
+  if (selectedCategory === "all") {
+    removeChildren(todoList);
+    populateList(todos);
+  } else {
+    let filteredTodos = todos.filter((todo) => {
+      return todo.category === selectedCategory
+    })
+    removeChildren(todoList);
+    populateList(filteredTodos)
+  }
 }
 
 //load up todos on page load WORKS

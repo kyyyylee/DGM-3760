@@ -64,6 +64,24 @@ button {
   padding-left: 15px;
 }
 
+#tasks .inputField input {
+  width: 60%;
+  height: 100%;
+  border: 1px solid var(--sub-grey);
+  font-size: 17px;
+  border-radius: 3px;
+  padding-left: 15px;
+}
+
+#tasks select {
+  width: 25%;
+  height: 100%;
+  border: 1px solid var(--sub-grey);
+  font-size: 12px;
+  border-radius: 3px;
+  margin-left: 4px;
+}
+
 .inputField button {
   width: 45px;
   margin-left: 10px;
@@ -90,6 +108,10 @@ button {
   padding-left: 15px;
   cursor: default;
   overflow: hidden;
+}
+
+.todoList, #tasks{
+  margin-top: 20px;
 }
 
 .done {
@@ -121,4 +143,18 @@ button {
 .footer button {
   font-size: 16px;
   padding: 6px 10px;
+}
+
+#categoryFilter{
+  width: 60%;
+  height: 100%;
+  border: 1px solid var(--sub-grey);
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+#filterLabel{
+  font-size: 12px;
+  margin-right: 10px;
 }
