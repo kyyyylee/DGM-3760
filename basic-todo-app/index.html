@@ -14,16 +14,36 @@
   />
   <body>
     <div class="wrapper">
+
       <header>Todo List</header>
+
+      <div id="categories">
+        <h2>Todo Categories</h2>
+        <div class="inputField">
+        <input type="text" id="category" placeholder="Enter new category">
+        <button><i class="fas fa-plus" id="categoryBTN"></i></button>
+        </div>
+        <ul class="categoryList"></ul>
+      </div>
+
+      <div id="tasks">
+      <h2>Todo Tasks</h2>
       <div class="inputField">
         <input type="text" id="input" placeholder="Enter new task" />
+        <select id="categorySelector"></select>
         <button><i class="fas fa-plus" id="newBtn"></i></button>
       </div>
+      </div>
+
+      <span id="filterLabel">Filter by category:</span>
+      <select id="categoryFilter"></select>
       <ul class="todoList"></ul>
+
       <div class="footer">
         <span id="pendingTasks">You have 0 pending tasks.</span>
         <button id="clearBTN">Clear Done</button>
       </div>
+
     </div>
 
     <script src="/basic-todo-app/src/app.js"></script>

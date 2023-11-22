@@ -3,6 +3,7 @@
 // DO NOT EDIT THIS ARRAY
 // You may add props to objects if needed.
 let todos = []
+let categories = []
 
 //global scopes
 const todoList = document.querySelector(".todoList");
@@ -10,6 +11,9 @@ const newButton = document.getElementById("newBtn");
 const newTodoInput = document.getElementById("input");
 const pendingTasks = document.querySelector("#pendingTasks");
 const clearButton = document.getElementById("clearBTN");
+const categoryButton = document.getElementById("categoryBTN");
+const categoryList = document.querySelector(".categoryList");
+const categoryFilterer = document.getElementById("categoryFilter")
 
 //prevent repeat todos WORKS
 function removeChildren(container) {
@@ -19,15 +23,16 @@ function removeChildren(container) {
 }
 
 //User can add todos WORKS
-
 newButton.addEventListener("click", addNewTodo);
 let newTodoID = 1
 function addNewTodo() {
   const newTodoName = document.getElementById("input").value;
+  const selectedCategory = document.getElementById("categorySelector").value
   const newTodo = {
     id: newTodoID,
     text: newTodoName,
-    complete: false
+    complete: false,
+    category: selectedCategory
   };
   todos.push(newTodo);
   removeChildren(todoList);
@@ -107,7 +112,7 @@ function deleteDoneTasks() {
   populateList(todos);
 }
 
-//User can delete todos
+//User can delete todos and categories
 function deleteTodo(id) {
   todos = todos.filter((todo) => {
     return todo.id !== id
@@ -115,14 +120,27 @@ function deleteTodo(id) {
   removeChildren(todoList);
   populateList(todos);
 }
-//User can edit todos
+function deleteCategory(id) {
+  categories = categories.filter((category) => {
+    return category.id !== id
+  })
+  removeChildren(categoryList);
+  populateCategories(categories);
+  categorySelection();
+  categoryFilter()
+  removeChildren(todoList);
+  populateList(todos);
+}
+
+//User can edit todos & categories
 function getTodoById(id) {
     return todos.find((todo) => {
       return todo.id === id
     })
   }
+
 function editTodo(id) {
-  let newText = prompt("Edit:", getTodoById(id).text)
+  let newText = prompt("Edit:")
   if (newText !== null) {
     todos = todos.map( (todo) => {
       if (todo.id === id) {
@@ -134,6 +152,31 @@ function editTodo(id) {
     populateList(todos);
   }
 }
+
+function getCategoryByID(id) {
+  return categories.find((category) => {
+    return category.id === id
+  })
+}
+
+function editCategory(id) {
+  let newText = prompt("Edit:")
+  if (newText !== null) {
+    categories = categories.map( (category) => {
+      if (category.id === id) {
+        category.name = newText
+      }
+      return category
+    })
+    removeChildren(categoryList);
+    populateCategories(categories);
+    categorySelection();
+    categoryFilter()
+    removeChildren(todoList);
+    populateList(todos);
+  }
+}
+
 
 //User can mark todos as complete WORKS
 function toggleDone(id) {
@@ -147,5 +190,89 @@ function toggleDone(id) {
     populateList(todos);
   }
 
+//User can add a catergory
+categoryButton.addEventListener("click", addCategory);
+let newCategoryID = 1
+function addCategory() {
+  const categoryText = document.getElementById("category").value
+  const newCategory = { 
+    name: categoryText,
+    id: newCategoryID, 
+  }
+  categories.push(newCategory);
+  removeChildren(categoryList);
+  populateCategories(categories);
+  categorySelection();
+  categoryFilter();
+  //clear input box after entering
+  document.getElementById("category").value = ""
+  newCategoryID ++
+  console.log(newCategory);
+}
+
+//User can view categories
+function populateCategories(categories) {
+  categories.forEach((category) => {
+    let listItem = document.createElement("li")
+    listItem.innerText = category.name 
+    let editButton = document.createElement("span")
+    editButton.classList.add("fa", "fa-edit", "editBtn")
+    editButton.onclick = (event) => {
+      event.stopPropagation()
+      editCategory(category.id)
+    }
+    let trashButton = document.createElement("span")
+    trashButton.classList.add("fa", "fa-trash")
+    trashButton.onclick = (event) => {
+      event.stopPropagation()
+      deleteCategory(category.id)
+    }
+    listItem.appendChild(trashButton)
+    listItem.appendChild(editButton)
+    categoryList.appendChild(listItem)
+  })
+}
+
+//User selects a category when adding a todo
+function categorySelection() {
+  let categorySelector = document.getElementById("categorySelector")
+  categorySelector.innerHTML = '<option value="">Category</option>'
+  categories.forEach((category) => {
+    let option = document.createElement("option")
+    option.value = category.name
+    option.innerText = category.name
+    categorySelector.appendChild(option)
+  })
+}
+
+//User can filter list by category
+categoryFilterer.addEventListener("change", filterTodos)
+
+function categoryFilter() {
+  categoryFilterer.innerHTML = '<option value="all">All</option>'
+  categories.forEach((category) => {
+    let option = document.createElement("option")
+    option.value = category.name
+    option.innerText = category.name
+    categoryFilterer.appendChild(option)
+  })
+}
+
+function filterTodos() {
+  let selectedCategory = document.getElementById("categoryFilter").value
+
+  if (selectedCategory === "all") {
+    removeChildren(todoList);
+    populateList(todos);
+  } else {
+    let filteredTodos = todos.filter((todo) => {
+      return todo.category === selectedCategory
+    })
+    removeChildren(todoList);
+    populateList(filteredTodos)
+  }
+}
+
 //load up todos on page load WORKS
 populateList(todos);
+
