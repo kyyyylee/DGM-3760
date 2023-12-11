@@ -55,12 +55,13 @@ let newTodoID = 3;
 function addNewTodo() {
   const newTodoName = document.getElementById("input").value;
   const selectedCategory = document.getElementById("categorySelector").value;
+
   fetch("/api/todos")
     .then((res) => res.json())
     .then((data) => {
-      const newTodo = {
+      let newTodo = {
         id: newTodoID,
-        text: newTodoName,
+        todo: newTodoName,
         complete: false,
         category: selectedCategory,
       };
@@ -104,7 +105,7 @@ function addNewTodo() {
 function populateList(todos) {
   todos.forEach((todo) => {
     let listItem = document.createElement("li");
-    listItem.innerText = todo.text;
+    listItem.innerText = todo.todo;
     listItem.onclick = () => {
       toggleDone(todo.id);
     };
@@ -191,7 +192,7 @@ function getTodoById(id) {
 function editTodo(id) {
   let newText = prompt("Edit:");
   if (newText !== null) {
-    const updatedTodo = { text: newText };
+    const updatedTodo = { todo: newText };
     fetch(`/api/todos/${id}`, {
       method: "PUT",
       body: JSON.stringify({ updatedTodo }),
@@ -203,14 +204,14 @@ function editTodo(id) {
 
         todos = todos.map((todo) => {
           if (todo.id === id) {
-            todo.text = newText;
+            todo.todo = newText;
           }
           return todo;
         });
 
         todos = todos.map((todo) => {
           if (todo.id === id) {
-            todo.text = newText;
+            todo.todo = newText;
           }
           return todo;
         });
