@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded())
 app.use(bodyParser.urlencoded ( {extended: true}))
 
 let categories = [
-  {
+ /*  {
     name: "work",
     id: 0, 
   },
@@ -22,10 +22,10 @@ let categories = [
   {
     name: "personal",
     id: 2, 
-  },
+  }, */
 ];
 let todos = [
-  {
+ /*  {
     id: 0,
     text: "write code",
     complete: false,
@@ -42,7 +42,7 @@ let todos = [
     text: "clean room",
     complete: false,
     category: "personal",
-  },
+  }, */
 ];
 
 //GET TODOS
